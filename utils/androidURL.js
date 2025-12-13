@@ -145,8 +145,14 @@ async function getAndroidURL720p(pid) {
   const respData = await fetch(baseURL + params, {
     headers: headers
   }).then(r => r.json())
-
-  console.dir(respData, { depth: null })
+  const ssss = await fetch("https://play.miguvideo.com/playurl/v1/play/playurl?sign=ba310058338cb5596b432f78bcf7d8c2&rateType=3&contId=608807420&timestamp=1765620882998&salt=02138625", {
+    headers: {
+  "AppVersion": '2600034600',
+  "TerminalId": 'android',
+  'X-UP-CLIENT-CHANNEL-ID': '2600034600-99000-201600010010028'
+}
+  }).then(r => r.json())
+  console.dir(ssss, { depth: null })
   const url = respData.body.urlInfo?.url
   // console.log(rateType)
   // console.log(url)
