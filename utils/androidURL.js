@@ -147,6 +147,25 @@ async function getAndroidURL720p(pid) {
   }).then(r => r.json())
   const ssss = await fetch("https://play.miguvideo.com/playurl/v1/play/playurl?sign=ba3fed4cd92710cc51cc58f3b89d4689&rateType=3&contId=608807420&timestamp=1765629576272&salt=75482825", {
     headers: {
+    // 核心：模拟国内 Chrome 浏览器
+  "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+  // 国内运营商/地域标识（可选，建议保留）
+  "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
+  // 接受的内容类型
+  "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+  // 缓存策略
+  "Cache-Control": "max-age=0",
+  // 避免被识别为爬虫（关键）
+  "Sec-Fetch-Dest": "document",
+  "Sec-Fetch-Mode": "navigate",
+  "Sec-Fetch-Site": "same-origin",
+  "Sec-Fetch-User": "?1",
+  // 国内常见的编码
+  "Accept-Encoding": "gzip, deflate, br",
+  // 咪咕视频必要的 Referer（根据请求的页面调整）
+  "Referer": "https://www.miguvideo.com/",
+  // 保持连接
+  "Connection": "keep-alive",
   "AppVersion": '2600034600',
   "TerminalId": 'android',
   'X-UP-CLIENT-CHANNEL-ID': '2600034600-99000-201600010010028'
