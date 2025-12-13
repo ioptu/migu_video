@@ -45,7 +45,8 @@ jobs:
            git commit -m "由github actions推送更新,日期:`date`"
       - name: 推送更改
         if: ${{ env.CHANGES!= 0 }}
-        uses:  ad-m/github-push-action@master
+        uses: ad-m/github-push-action@v0.6.0  # 固定版本，避免 master 分支兼容问题
         with:
-          github_token: ${{ secrets.MIGU_TOKEN }}
-          branch: main
+          github_token: ${{ secrets.PUSH_TOKEN }}  # 用自定义 PAT
+          branch: main  # 确认你的主分支是 main（不是 master）
+          force: false  # 非必要，如需强制推送设为 true
