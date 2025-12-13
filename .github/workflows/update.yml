@@ -29,7 +29,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20  # 指定 Node.js 版本
-
+      - name: 设置时区
+        run: sudo timedatectl set-timezone 'Asia/Shanghai'
       - name: 安装依赖（如有）
         run: npm install
 
