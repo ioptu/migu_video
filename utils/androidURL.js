@@ -123,7 +123,7 @@ async function getAndroidURL720p(pid) {
     TerminalId: "android",
     "X-UP-CLIENT-CHANNEL-ID": `${appVersionID}`
   }
-  // console.log(headers)
+  console.log(headers)
   const str = timestramp + pid + appVersion.substring(0, 8)
   const md5 = getStringMD5(str)
 
@@ -144,13 +144,13 @@ async function getAndroidURL720p(pid) {
     headers: headers
   }).then(r => r.json())
 
-  // console.dir(respData, { depth: null })
+  console.dir(respData, { depth: null })
   const url = respData.body.urlInfo?.url
-  // console.log(rateType)
-  // console.log(url)
+  console.log(rateType)
+  console.log(url)
   if (!url) {
     return {
-      url: "123",
+      url: "",
       rateType: 0,
       content: respData
     }
