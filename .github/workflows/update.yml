@@ -52,9 +52,16 @@ jobs:
         if: ${{ env.CHANGES != 0 }}
         run: |    
           echo "CHANGES: ${{ env.CHANGES }}"
-          # 拉取最新代码（用 PAT 鉴权，避免 bot 身份）
+          # 步骤1：暂存本地未提交的更改（关键！解决 unstaged changes 错误）
+          git stash push -u -m "temp stash for pull rebase"
+          
+          # 步骤2：拉取最新代码（补全完整 URL，用 PAT 鉴权）
           git pull https://${{ env.USER_NAME }}:${{ env.MIGU_TOKEN }}@${{ env.REPO_URL }} main --rebase
-          # 配置本地 Git 身份（你的账号）
+          
+          # 步骤3：恢复暂存的更改（保留本地修改）
+          git stash pop || echo "No stash to pop (safe to ignore)"
+          
+          # 步骤4：配置 Git 身份 + 提交更改
           git config --local user.email "${{ env.USER_EMAIL }}"
           git config --local user.name "${{ env.USER_NAME }}"
           git add .
