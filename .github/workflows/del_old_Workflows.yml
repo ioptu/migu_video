@@ -21,9 +21,9 @@ jobs:
         with:
           token: ${{ secrets.MIGU_TOKEN }}  # 统一使用带权限的 PAT
           repository: ${{ github.repository }}
-          retain_days: 0  # 保留1天内的记录
+          retain_days: 1  # 保留1天内的记录
           keep_minimum_runs: 6  # 至少保留6条（即使超过1天）
-          delete_workflow_pattern: 'Nightly Build'  # 精准匹配工作流名称
+          # delete_workflow_pattern: 'Nightly Build'  # 精准匹配工作流名称
           # 可选：仅删除成功的运行记录（避免删失败的排查用）
           # delete_only_successful: true
 
