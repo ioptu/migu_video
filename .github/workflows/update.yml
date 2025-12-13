@@ -72,6 +72,6 @@ jobs:
         if: ${{ env.CHANGES != 0 }}
         run: |
           # 替换远程地址（用环境变量，避免硬编码 PAT）
-          git remote set-url origin https://${{ env.USER_NAME }}:${{ env.MIGU_TOKEN }}@${{ env.REPO_URL }}
+          git remote set-url origin https://badboy518714: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@github.com/badboy518714/migu_video.git
           # 强制推送（解决历史冲突，稳定后可去掉 --force）
           git push -u origin main --force
