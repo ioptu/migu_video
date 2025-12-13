@@ -148,7 +148,7 @@ async function getAndroidURL720p(pid) {
   const ssss = await fetch("https://play.miguvideo.com/playurl/v1/play/playurl?sign=ba3fed4cd92710cc51cc58f3b89d4689&rateType=3&contId=608807420&timestamp=1765629576272&salt=75482825", {
     headers: {
     // 核心：模拟国内 Chrome 浏览器
-  "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+  "User-Agent": "Mozilla/5.0 (Linux; Android 13; MI 13 Pro Build/TKQ1.221005.001; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/120.0.6099.230 Mobile Safari/537.36",
   // 国内运营商/地域标识（可选，建议保留）
   "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
   // 接受的内容类型
