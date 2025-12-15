@@ -91,13 +91,13 @@
         <title lang="zh">前情提要-风与潮-第8集</title>
     </programme>
     <programme channel="CCTV1综合" start="20251215200700 +0800" stop="20251215205850 +0800">
-        <title lang="zh">风与潮8/31</title>
+        <title lang="zh">风与潮第8集</title>
     </programme>
     <programme channel="CCTV1综合" start="20251215205850 +0800" stop="20251215210240 +0800">
         <title lang="zh">前情提要-风与潮-第9集</title>
     </programme>
     <programme channel="CCTV1综合" start="20251215210240 +0800" stop="20251215220000 +0800">
-        <title lang="zh">风与潮9/31</title>
+        <title lang="zh">风与潮第9集</title>
     </programme>
     <programme channel="CCTV1综合" start="20251215220000 +0800" stop="20251215223630 +0800">
         <title lang="zh">晚间新闻</title>
@@ -853,13 +853,13 @@
         <title lang="zh">本集提要-老舅-第1集</title>
     </programme>
     <programme channel="CCTV8电视剧" start="20251215193000 +0800" stop="20251215202510 +0800">
-        <title lang="zh">老舅1/27</title>
+        <title lang="zh">老舅第1集</title>
     </programme>
     <programme channel="CCTV8电视剧" start="20251215202510 +0800" stop="20251215203010 +0800">
         <title lang="zh">本集提要-老舅-第2集</title>
     </programme>
     <programme channel="CCTV8电视剧" start="20251215203010 +0800" stop="20251215212205 +0800">
-        <title lang="zh">老舅2/27</title>
+        <title lang="zh">老舅第2集</title>
     </programme>
     <programme channel="CCTV8电视剧" start="20251215212205 +0800" stop="20251215212650 +0800">
         <title lang="zh">本集提要-长安二十四计-第7集</title>
@@ -868,7 +868,7 @@
         <title lang="zh">长安二十四计7/28</title>
     </programme>
     <programme channel="CCTV8电视剧" start="20251215221635 +0800" stop="20251215221840 +0800">
-        <title lang="zh">本集提要-长安二十四计-8/28</title>
+        <title lang="zh">本集提要-长安二十四计-第8集</title>
     </programme>
     <programme channel="CCTV8电视剧" start="20251215221840 +0800" stop="20251215230825 +0800">
         <title lang="zh">长安二十四计8/28</title>
@@ -4026,11 +4026,8 @@
     <programme channel="北京卫视" start="20251215213800 +0800" stop="20251215222400 +0800">
         <title lang="zh">档案</title>
     </programme>
-    <programme channel="北京卫视" start="20251215222400 +0800" stop="20251215230500 +0800">
-        <title lang="zh">红星剧场:唐朝诡事录之长安(17)</title>
-    </programme>
-    <programme channel="北京卫视" start="20251215230500 +0800" stop="20251215235000 +0800">
-        <title lang="zh">红星剧场:唐朝诡事录之长安(18)</title>
+    <programme channel="北京卫视" start="20251215222400 +0800" stop="20251215235000 +0800">
+        <title lang="zh">红星剧场:唐朝诡事录之长安17-18</title>
     </programme>
     <programme channel="北京卫视" start="20251215235000 +0800" stop="20251216001300 +0800">
         <title lang="zh">紫禁城</title>
