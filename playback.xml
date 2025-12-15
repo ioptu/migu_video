@@ -865,13 +865,13 @@
         <title lang="zh">本集提要-长安二十四计-第7集</title>
     </programme>
     <programme channel="CCTV8电视剧" start="20251215212650 +0800" stop="20251215221635 +0800">
-        <title lang="zh">长安二十四计7/28</title>
+        <title lang="zh">长安二十四计第7集</title>
     </programme>
     <programme channel="CCTV8电视剧" start="20251215221635 +0800" stop="20251215221840 +0800">
         <title lang="zh">本集提要-长安二十四计-第8集</title>
     </programme>
     <programme channel="CCTV8电视剧" start="20251215221840 +0800" stop="20251215230825 +0800">
-        <title lang="zh">长安二十四计8/28</title>
+        <title lang="zh">长安二十四计第8集</title>
     </programme>
     <programme channel="CCTV8电视剧" start="20251215230825 +0800" stop="20251215235425 +0800">
         <title lang="zh">黑白禁区第38集</title>
@@ -3150,7 +3150,7 @@
     <programme channel="体坛名栏汇" start="20251215223000 +0800" stop="20251215231700 +0800">
         <title lang="zh">篮球公园20240202探访台盘村“村BA”</title>
     </programme>
-    <programme channel="体坛名栏汇" start="20251215231700 +0800" stop="20251216000100 +0800">
+    <programme channel="体坛名栏汇" start="20251215231700 +0800" stop="20251216000000 +0800">
         <title lang="zh">篮球公园20240126深圳后卫贺希宁</title>
     </programme>
     <channel id="四海钓鱼">
