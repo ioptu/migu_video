@@ -285,7 +285,7 @@ async function fetchMiguVideo(url){
     const data = await response.json(); // 若返回 JSON 用这个
     // const data = await response.text(); // 若返回纯文本用这个
     const res = data.data.data.response.body
-    console.log("请求结果：", res); // 最终拿到数据
+    // console.log("请求结果：", res); // 最终拿到数据
     return JSON.parse(res);
   } catch (error) {
     console.error("请求失败：", error); // 捕获网络/解析错误
