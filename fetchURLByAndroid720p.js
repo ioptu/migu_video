@@ -41,7 +41,7 @@ async function fetchURLByAndroid720p() {
 
       // 获取链接
       const resObj = await getAndroidURL720p(data[j].pID)
-      // printGreen(resObj)
+      printBlue(resObj.url)
       if (resObj.url != "") {
         let z = 1
         while (z <= 6) {
