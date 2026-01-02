@@ -1,86 +1,46 @@
-name: update咪咕
-on:
+name: update migu
+on: 
+  #schedule: 
+    #- cron: 11 */3 * * *
   workflow_dispatch:
-  # push:
-  #schedule:
-   # - cron: 0 */3 * * *
   repository_dispatch: #允许外部触发,cf worker定时任务延迟在1分钟以内
     types: [mgcron]
 jobs:
-  run:
+  main:
+    name: update migu
     runs-on: ubuntu-latest
-    env:
-      # 建议将 PAT 存为仓库 Secret（名称：MIGU_TOKEN），避免硬编码
-      MIGU_TOKEN: ${{ secrets.MIGU_TOKEN }}
-      USER_NAME: badboy518714
-      USER_EMAIL: 474628725@qq.com
-      REPO_URL: github.com/badboy518714/migu_video.git
-    steps:
-      - name: 克隆仓库（PAT 鉴权）
-        run: |
-          # 配置 Git 禁用终端交互，强制使用 URL 中的 PAT 鉴权
-          git config --global credential.helper store
-          git config --global core.askpass ""
-          # 手动克隆（临时硬编码 PAT 调试，验证后换回 Secret）
-          # 替换为你的真实 PAT
-          git clone https://${{ env.USER_NAME }}:${{ env.MIGU_TOKEN }}@${{ env.REPO_URL }} .
-          # 拉取完整历史，切换到 main 分支
-          git fetch --all
-          git checkout main
-      - name: 安装Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.8'
-      - name: 加载缓存  
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/run_in_Actions/requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
-      - name: 设置时区
-        run: sudo timedatectl set-timezone 'Asia/Shanghai'
-      - name: 安装依赖
-        run: |
-          pip install -r requirements.txt
-      - name: 执行任务
-        run: |
-          python MIGU.py
-        
-      - name: 检测文件是否更新
-        id: check_updates
-        run: | 
-          CHANGES=0
-          UPDATED_FILES=$(git status --porcelain)
-          if [ -n "$UPDATED_FILES" ]; then
-            echo "UPDATED_FILES: $UPDATED_FILES"
-            CHANGES=1
-          else
-            echo "No updated files. Skipping git add."          
-          fi
-          echo "CHANGES=$CHANGES" >> $GITHUB_ENV
-      - name: 提交更改
-        if: ${{ env.CHANGES != 0 }}
-        run: |    
-          echo "CHANGES: ${{ env.CHANGES }}"
-          # 步骤1：暂存本地未提交的更改（关键！解决 unstaged changes 错误）
-          git stash push -u -m "temp stash for pull rebase"
-          
-          # 步骤2：拉取最新代码（补全完整 URL，用 PAT 鉴权）
-          git pull https://${{ env.USER_NAME }}:${{ env.MIGU_TOKEN }}@${{ env.REPO_URL }} main --rebase
-          
-          # 步骤3：恢复暂存的更改（保留本地修改）
-          git stash pop || echo "No stash to pop (safe to ignore)"
-          
-          # 步骤4：配置 Git 身份 + 提交更改
-          git config --local user.email "${{ env.USER_EMAIL }}"
-          git config --local user.name "${{ env.USER_NAME }}"
-          git add .
-          git commit -m "由github actions推送更新,日期:`date`"
+    permissions:
+      contents: write  # 允许推送代码
+    steps: 
+    - name: Checkout code
+      uses: actions/checkout@v5
+    - name: fetch and modify
+      run: |
+          pip install requests futures
 
-      # 步骤4：推送更改（仅当有更改时执行）
-      - name: 推送更改
-        if: ${{ env.CHANGES != 0 }}
-        run: |
-          # HTTPS 方式（直接指定 URL 推送）
-          git push -u https://${{ env.USER_NAME }}:${{ env.MIGU_TOKEN }}@${{ env.REPO_URL }} main 
+          python MIGU.py
+
+          
+    - name: CommitAndPush
+      run: |
+        # 获取仓库名称（${VAR#*/} 是 Bash 的字符串操作，去掉 owner/ 前缀）
+        REPO_NAME="${GITHUB_REPOSITORY#*/}"
+        git config --global user.email "github@github.com"
+        git config --global user.name "Github Actions"
+        
+        # 克隆仓库（使用 HTTPS + TOKEN 避免权限问题）
+        git clone "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
+        cd "$REPO_NAME" || exit 1  # 强制失败时退出
+
+        # 后续操作...
+        mv ../migu.txt ./migu.txt
+
+
+
+        git add .
+        if git diff --cached --quiet; then
+          echo "No changes to commit."
+        else
+          git commit -m "Update: $(date +'%Y-%m-%d %H:%M:%S')"
+          git push origin main
+        fi
