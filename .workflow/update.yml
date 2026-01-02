@@ -3,8 +3,8 @@ name: update
 displayName: update
 triggers:
   trigger: auto
-  schedule:
-    - cron: '* 0 */6 * * ? *'
+  #schedule:
+    #- cron: '* 0 */6 * * ? *'
 variables:
   global:
     - TOKEN
