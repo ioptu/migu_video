@@ -1,7 +1,7 @@
 name: 删除 Old Workflows
 on:
-  schedule:
-    - cron: '0 0 * * *'  # 每天 UTC 0点执行（北京时间8点）
+  #schedule:
+    #- cron: '0 0 * * *'  # 每天 UTC 0点执行（北京时间8点）
   workflow_dispatch:
     inputs:
       root_sol:
