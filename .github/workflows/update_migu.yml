@@ -18,9 +18,9 @@ jobs:
       run: |
           pip install requests futures
 
-          python MIGU.py
+          python MIGU.py || true
 
-          wget https://epg.112114.xyz/pp.xml -O e.xml  -t 2 --waitretry=5
+          wget https://epg.112114.xyz/pp.xml -O e.xml  -t 2 --waitretry=5 || true
 
           
     - name: CommitAndPush
@@ -35,8 +35,8 @@ jobs:
         cd "$REPO_NAME" || exit 1  # 强制失败时退出
 
         # 后续操作...
-        mv ../migu.txt ./migu.txt
-        mv ../e.xml ./e.xml
+        mv ../migu.txt ./migu.txt || true
+        mv ../e.xml ./e.xml || true
 
 
 
