@@ -22,8 +22,8 @@ jobs:
 
           wget https://epg.112114.xyz/pp.xml -O e.xml  -t 2 --waitretry=5 || true
 
-          wget https://github.com/xiaolin330328/ctv/raw/d259f83949249d918e0dfe109fe1774df8819f1e/%E7%AC%AC%E4%BA%8C -O op.txt  -t 2 --waitretry=5 
-          sed -n '611,686p' op.txt > hm.txt
+          #wget https://github.com/xiaolin330328/ctv/raw/d259f83949249d918e0dfe109fe1774df8819f1e/%E7%AC%AC%E4%BA%8C -O op.txt  -t 2 --waitretry=5 
+          #sed -n '611,686p' op.txt > hm.txt
     - name: CommitAndPush
       run: |
         # 获取仓库名称（${VAR#*/} 是 Bash 的字符串操作，去掉 owner/ 前缀）
@@ -38,7 +38,7 @@ jobs:
         # 后续操作...
         mv ../migu.txt ./migu.txt || true
         mv ../e.xml ./e.xml || true
-        mv ../hm.txt ./港澳频道.txt
+        #mv ../hm.txt ./港澳频道.txt
 
 
 
