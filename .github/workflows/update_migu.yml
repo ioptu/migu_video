@@ -20,7 +20,7 @@ jobs:
 
           python MIGU.py || true
 
-          wget https://epg.112114.xyz/pp.xml -O e.xml  -t 2 --waitretry=5 || true
+          wget http://epg.51zmt.top:8000/e.xml -O e.xml  -t 2 --waitretry=5 || true
 
           #wget https://github.com/xiaolin330328/ctv/raw/d259f83949249d918e0dfe109fe1774df8819f1e/%E7%AC%AC%E4%BA%8C -O op.txt  -t 2 --waitretry=5 
           #sed -n '611,686p' op.txt > hm.txt
