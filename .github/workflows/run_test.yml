@@ -2,10 +2,9 @@ name: test rruuns
 
 on: 
   schedule: 
-    - cron: '17 * * * *'
+    - cron: '27 * * * *'
   workflow_dispatch:
-  repository_dispatch: 
-    types: [tvcron]
+
     
 # 防止并发：如果新任务触发，取消掉正在运行的旧任务
 concurrency:
