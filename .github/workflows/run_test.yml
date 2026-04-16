@@ -2,7 +2,7 @@ name: test rruuns
 
 on: 
   schedule: 
-    - cron: '27 * * * *'
+    - cron: '40 * * * *'
   workflow_dispatch:
 
     
