@@ -7,7 +7,7 @@ echo "==== 开始执行抓取逻辑: $(date -u) ===="
 python MIGU.py || true
 python sort_m3u.py || true
 
-wget https://github.com/Afiq0/Pluto-TV-Playlists/raw/refs/heads/main/output/plutotv_us.m3u8 -O plt.m3u  -t 2 --waitretry=5 || true
+# wget https://github.com/Afiq0/Pluto-TV-Playlists/raw/refs/heads/main/output/plutotv_us.m3u8 -O plt.m3u  -t 2 --waitretry=5 || true
 wget https://github.com/482349841209/rakuten-m3u-generator/raw/refs/heads/master/output/rakuten.m3u -O rkt.m3u  -t 2 --waitretry=5 || true
 
 # 2. 提交推送阶段 (完全复刻原 CommitAndPush 逻辑)
