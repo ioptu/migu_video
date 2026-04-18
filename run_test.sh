@@ -7,6 +7,9 @@ echo "==== 开始执行抓取逻辑: $(date -u) ===="
 python MIGU.py || true
 python sort_m3u.py || true
 
+wget https://github.com/Afiq0/Pluto-TV-Playlists/raw/refs/heads/main/output/plutotv_us.m3u8 -O plt.m3u  -t 2 --waitretry=5 || true
+wget https://github.com/482349841209/rakuten-m3u-generator/raw/refs/heads/master/output/rakuten.m3u -O rkt.m3u  -t 2 --waitretry=5 || true
+
 # 2. 提交推送阶段 (完全复刻原 CommitAndPush 逻辑)
 REPO_NAME="${GITHUB_REPOSITORY#*/}"
 git config --global user.email "github@github.com"
@@ -19,6 +22,8 @@ cd "temp_repo_dir" || exit 1
 # 从上级目录移动文件到当前子目录
 [ -f "../migu.m3u" ] && mv ../migu.m3u ./migu.m3u || true
 [ -f "../cctv.migu.m3u" ] && mv ../cctv.migu.m3u ./cctv.migu.m3u || true
+[ -f ../plt.m3u ] && mv ../plt.m3u ./plutotv.m3u || true
+[ -f ../rkt.m3u ] && mv ../rkt.m3u ./rakutentv.m3u || true
 git add .
 if git diff --cached --quiet; then
   echo "No changes to commit."
