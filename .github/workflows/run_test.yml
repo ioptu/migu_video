@@ -33,7 +33,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: bash ./run_test.sh
 
-      # --- 延时逻辑：在 UTC 23, 00, 01 时段进行 3 次整点追踪 ---
+      # --- 延时逻辑：在 UTC 23, 00, 01, 05时段进行整点追踪 ---
       - name: Precision Hourly Sync
         if: success()
         env:
@@ -41,7 +41,7 @@ jobs:
         run: |
           CURRENT_HOUR=$(date -u +"%H")
           
-          if [[ "$CURRENT_HOUR" == "23" || "$CURRENT_HOUR" == "00" || "$CURRENT_HOUR" == "01" ]]; then
+          if [[ "$CURRENT_HOUR" == "23" || "$CURRENT_HOUR" == "00" || "$CURRENT_HOUR" == "01" || "$CURRENT_HOUR" == "05" ]]; then
             echo "当前处于核心时段 ($CURRENT_HOUR 点)，启动 3 小时整点追踪..."
             
             for i in {1..3}; do
