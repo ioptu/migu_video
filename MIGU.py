@@ -20,11 +20,11 @@ headers = {
     "Sec-Fetch-Mode": "cors",
     "Sec-Fetch-Site": "same-site",
     "Support-Pendant": "1",
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 Edg/145.0.0.0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0",
     "appCode": "miguvideo_default_h5",
     "appId": "miguvideo",
     "channel": "H5",
-    "sec-ch-ua": "\"Chromium\";v=\"145\", \"Microsoft Edge\";v=\"145\", \"Not.A/Brand\";v=\"99\"",
+    "sec-ch-ua": "\"Chromium\";v=\"149\", \"Microsoft Edge\";v=\"149\", \"Not.A/Brand\";v=\"99\"",
     "sec-ch-ua-mobile": "?0",
     "sec-ch-ua-platform": "\"Windows\"",
     "terminalId": "h5"
