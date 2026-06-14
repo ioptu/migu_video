@@ -5,8 +5,9 @@ import random
 import hashlib
 from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor
+from requests.exceptions import RequestException  # 导入异常类
 
-thread_mum = 10  # 线程数
+thread_num = 10  # 多线程并发
 
 headers = {
     "Accept": "application/json, text/plain, */*",
@@ -293,24 +294,38 @@ def getddCalcu720p(url, pID):
 
 
 def append_All_Live(live, flag, data):
-    try:
-        respData = get_content(data["pID"])
-        raw_url = respData["body"]["urlInfo"]["url"]
-        real_pid = respData.get("body", {}).get("content", {}).get("contId", data["pID"])
-        
-        playurl = getddCalcu720p(raw_url, real_pid)
-        rate = respData["body"]["urlInfo"].get("rateType", "未知")
+    max_retries = 3  # 最大重试次数
+    base_delay = 2   # 基础等待时间（秒）
 
-        content = f'#EXTINF:-1 tvg-id="{data["name"]}" tvg-name="{data["name"]}" tvg-logo="{data["pics"]["highResolutionH"]}" group-title="{live}",{data["name"]}\n{playurl}\n'
-        All_Live[flag] = content
-        print(f'频道 [{data["name"]}] rateType={rate} → 更新成功')
-    except Exception as e:
-        print(f'频道 [{data["name"]}] 更新失败！ ERROR: {e}')
+    for attempt in range(1, max_retries + 1):
+        try:
+            respData = get_content(data["pID"])
+            raw_url = respData["body"]["urlInfo"]["url"]
+            real_pid = respData.get("body", {}).get("content", {}).get("contId", data["pID"])
+            
+            playurl = getddCalcu720p(raw_url, real_pid)
+            rate = respData["body"]["urlInfo"].get("rateType", "未知")
+
+            content = f'#EXTINF:-1 tvg-id="{data["name"]}" tvg-name="{data["name"]}" tvg-logo="{data["pics"]["highResolutionH"]}" group-title="{live}",{data["name"]}\n{playurl}\n'
+            All_Live[flag] = content
+            print(f'频道 [{data["name"]}] rateType={rate} → 更新成功')
+            return  # 成功获取，直接退出重试循环
+
+        except (RequestException, KeyError, IndexError, json.JSONDecodeError) as e:
+            # 捕获网络异常与解析异常
+            if attempt < max_retries:
+                # 计算延迟：2^attempt + 随机抖动（防止并发请求在同一时间再次对代理服务器发起轰炸）
+                delay = (base_delay ** attempt) + random.uniform(0.5, 1.5)
+                print(f'频道 [{data["name"]}] 第 {attempt} 次请求失败 ({e})，将在 {delay:.2f} 秒后重试...')
+                time.sleep(delay)
+            else:
+                # 耗尽重试次数后输出最终失败日志
+                print(f'频道 [{data["name"]}] 更新失败！已达到最大重试次数。 ERROR: {e}')
 
 
 def update(live, url):
     global FLAG, All_Live
-    pool = ThreadPoolExecutor(thread_mum)
+    pool = ThreadPoolExecutor(thread_num)
     response = requests.get(url, headers=headers).json()
     dataList = response["body"]["dataList"]
     for flag, data in enumerate(dataList):
