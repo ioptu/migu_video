@@ -330,8 +330,8 @@ def update(live, url):
     # dataList = response["body"]["dataList"]
     # 提取初始列表
     rawList = response["body"]["dataList"]
-    # 【黑名单前置过滤】直接剔除版权限制、无法匿名访问的频道
-    dataList = [item for item in rawList if item.get("name") not in ["CHC动作电影", "CHC家庭影院"]]
+    # 【黑名单前置过滤】直接剔除版权限制、无法匿名访问或其它有问题的频道
+    dataList = [item for item in rawList if item.get("name") not in ["CHC动作电影","CHC家庭影院","海南广播电视总台自贸频道","海南广播电视总台社会与法频道","海南广播电视总台新闻频道","海南广播电视总台文旅频道","海南广播电视总台少儿频道"]]
     for flag, data in enumerate(dataList):
         All_Live.append("")
         pool.submit(append_All_Live, live, FLAG + flag, data)
