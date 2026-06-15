@@ -327,7 +327,11 @@ def update(live, url):
     global FLAG, All_Live
     pool = ThreadPoolExecutor(thread_num)
     response = requests.get(url, headers=headers).json()
-    dataList = response["body"]["dataList"]
+    # dataList = response["body"]["dataList"]
+    # 提取初始列表
+    rawList = response["body"]["dataList"]
+    # 【黑名单前置过滤】直接剔除版权限制、无法匿名访问的频道
+    dataList = [item for item in rawList if item.get("name") not in ["CHC动作电影", "CHC家庭影院"]]
     for flag, data in enumerate(dataList):
         All_Live.append("")
         pool.submit(append_All_Live, live, FLAG + flag, data)
