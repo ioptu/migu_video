@@ -3,11 +3,12 @@ import json
 import time
 import random
 import hashlib
+import threading
 from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor
-from requests.exceptions import RequestException  # 导入异常类
+from requests.exceptions import RequestException
 
-thread_num = 10  # 多线程并发
+thread_num = 10  # 线程数
 
 headers = {
     "Accept": "application/json, text/plain, */*",
@@ -52,6 +53,10 @@ path = 'mig.m3u'
 appVersion = "2600034600"
 All_Live = []
 FLAG = 0
+
+# 全局去重缓存与线程锁
+url_cache = {}          
+cache_lock = threading.Lock()
 
 
 def format_date_ymd():
@@ -115,19 +120,14 @@ def get_content(pid):
         "Referrer-Policy": "strict-origin-when-cross-origin"
     }
 
-    # ==================== 广东卫视特殊处理 ====================
     if pid == "608831231":
-        rateType = "2"   # 广东卫视使用 rateType=2 更稳定
+        rateType = "2"
         print(f"[特殊处理] 广东卫视 使用 rateType=2")
     else:
-        rateType = "3"   # 其他频道强制 720P（非会员最高清晰度）
-    # =========================================================
+        rateType = "3"
 
     client_id = md5(str(int(time.time() * 1000)))
-
     result = getSaltAndSign(pid)
-
-    # 额外参数
     extra_params_str = "&flvEnable=true&super4k=true"
 
     URL = (f"https://play.miguvideo.com/playurl/v1/play/playurl?"
@@ -136,7 +136,6 @@ def get_content(pid):
 
     params_list = URL.split("?")[1].split("&")
 
-    # 构建 Apipost Header
     header_parameter = [
         {"description": "", "field_type": "string", "is_checked": 1, "key": "AppVersion",
          "value": "2600034600", "not_None": 1, "schema": {"type": "string"}, "param_id": "3c60653273e0b3"},
@@ -148,14 +147,12 @@ def get_content(pid):
          "value": client_id, "not_None": 1, "schema": {"type": "string"}, "param_id": "clientid_new"}
     ]
 
-    # CCTV5 / CCTV5+ 不加 appCode
     if pid not in ["641886683", "641886773"]:
         header_parameter.append({
             "description": "", "field_type": "string", "is_checked": 1, "key": "appCode",
             "value": "miguvideo_default_android", "not_None": 1, "schema": {"type": "string"}, "param_id": "appcode_new"
         })
 
-    # 动态生成 query parameter
     query_parameter = []
     for idx, p in enumerate(params_list):
         if '=' in p:
@@ -263,15 +260,19 @@ def get_content(pid):
     body_str = json.dumps(body, separators=(",", ":"))
     proxy_url = "https://workspace.apipost.net/proxy/v2/http"
 
-    resp = requests.post(proxy_url, headers=_headers, data=body_str, timeout=15)
-    
+    resp = None
     try:
+        resp = requests.post(proxy_url, headers=_headers, data=body_str, timeout=15)
         result = resp.json()
         response_body = result["data"]["data"]["response"]["body"]
         return json.loads(response_body)
     except Exception as e:
         print(f"Apipost 返回解析失败: {e}")
-        print("原始响应:", resp.text[:500])
+        # ✅ 修复点1：安全地打印异常日志，避免 NameError 引起的二次崩溃
+        if resp is not None:
+            print("原始响应:", resp.text[:500])
+        else:
+            print("未能成功获取到响应对象（可能由于请求超时或网络中断）。")
         raise
 
 
@@ -294,49 +295,68 @@ def getddCalcu720p(url, pID):
 
 
 def append_All_Live(live, flag, data):
-    max_retries = 3  # 最大重试次数
-    base_delay = 2   # 基础等待时间（秒）
+    channel_name = data["name"]
+    channel_pid = data["pID"]
+    
+    # 创建双向锁定组合键 (名字, pid)
+    cache_key = (channel_name, channel_pid)
+    
+    with cache_lock:
+        if cache_key in url_cache:
+            playurl, rate = url_cache[cache_key]
+            content = f'#EXTINF:-1 tvg-id="{channel_name}" tvg-name="{channel_name}" tvg-logo="{data["pics"]["highResolutionH"]}" group-title="{live}",{channel_name}\n{playurl}\n'
+            All_Live[flag] = content
+            print(f'频道 [{channel_name}] (PID:{channel_pid}) -> [通过Name+PID双重校验] 从去重缓存秒速同步成功')
+            return
+
+    max_retries = 3  
+    base_delay = 2   
 
     for attempt in range(1, max_retries + 1):
         try:
-            respData = get_content(data["pID"])
+            respData = get_content(channel_pid)
             raw_url = respData["body"]["urlInfo"]["url"]
-            real_pid = respData.get("body", {}).get("content", {}).get("contId", data["pID"])
+            real_pid = respData.get("body", {}).get("content", {}).get("contId", channel_pid)
             
             playurl = getddCalcu720p(raw_url, real_pid)
             rate = respData["body"]["urlInfo"].get("rateType", "未知")
 
-            content = f'#EXTINF:-1 tvg-id="{data["name"]}" tvg-name="{data["name"]}" tvg-logo="{data["pics"]["highResolutionH"]}" group-title="{live}",{data["name"]}\n{playurl}\n'
+            with cache_lock:
+                url_cache[cache_key] = (playurl, rate)
+
+            content = f'#EXTINF:-1 tvg-id="{channel_name}" tvg-name="{channel_name}" tvg-logo="{data["pics"]["highResolutionH"]}" group-title="{live}",{channel_name}\n{playurl}\n'
             All_Live[flag] = content
-            print(f'频道 [{data["name"]}] rateType={rate} → 更新成功')
-            return  # 成功获取，直接退出重试循环
+            print(f'频道 [{channel_name}] rateType={rate} → 更新成功')
+            return
 
         except (RequestException, KeyError, IndexError, json.JSONDecodeError) as e:
-            # 捕获网络异常与解析异常
             if attempt < max_retries:
-                # 计算延迟：2^attempt + 随机抖动（防止并发请求在同一时间再次对代理服务器发起轰炸）
                 delay = (base_delay ** attempt) + random.uniform(0.5, 1.5)
-                print(f'频道 [{data["name"]}] 第 {attempt} 次请求失败 ({e})，将在 {delay:.2f} 秒后重试...')
+                print(f'频道 [{channel_name}] 第 {attempt} 次请求失败 ({e})，将在 {delay:.2f} 秒后重试...')
                 time.sleep(delay)
             else:
-                # 耗尽重试次数后输出最终失败日志
-                print(f'频道 [{data["name"]}] 更新失败！已达到最大重试次数。 ERROR: {e}')
+                print(f'频道 [{channel_name}] 更新失败！已达到最大重试次数。 ERROR: {e}')
 
 
 def update(live, url):
     global FLAG, All_Live
     pool = ThreadPoolExecutor(thread_num)
     response = requests.get(url, headers=headers).json()
-    # dataList = response["body"]["dataList"]
     # 提取初始列表
     rawList = response["body"]["dataList"]
-    # 【黑名单前置过滤】直接剔除版权限制、无法匿名访问或其它有问题的频道
+    
+    # 【黑名单前置过滤】直接剔除版权限制、无法匿名访问的频道
     dataList = [item for item in rawList if item.get("name") not in ["CHC动作电影","CHC家庭影院","海南广播电视总台自贸频道","海南广播电视总台社会与法频道","海南广播电视总台新闻频道","海南广播电视总台文旅频道","海南广播电视总台少儿频道"]]
-    for flag, data in enumerate(dataList):
-        All_Live.append("")
-        pool.submit(append_All_Live, live, FLAG + flag, data)
-    pool.shutdown()
+    
+    # ✅ 修复点2：前置一次性扩容占位符，保护 FLAG 在多线程上下文下的定位安全性
+    current_start_flag = FLAG
+    All_Live.extend([""] * len(dataList))
     FLAG += len(dataList)
+    
+    for flag_offset, data in enumerate(dataList):
+        pool.submit(append_All_Live, live, current_start_flag + flag_offset, data)
+        
+    pool.shutdown()
 
 
 def main():
