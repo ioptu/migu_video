@@ -8,7 +8,7 @@ from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor
 from requests.exceptions import RequestException
 
-thread_num = 10  # 线程数
+thread_num = 5  # 线程数
 
 headers = {
     "Accept": "application/json, text/plain, */*",
