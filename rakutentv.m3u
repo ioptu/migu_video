@@ -15,8 +15,6 @@ https://sci-fi-rakuten-tv-uk.fast.rakuten.tv/v1/master/0547f18649bd788bec7b67b74
 https://thriller-rakuten-tv-uk.fast.rakuten.tv/v1/master/0547f18649bd788bec7b67b746e47670f558b6b2/production-LiveChannel-6482/master.m3u8
 #EXTINF:-1 tvg-chno=34 tvg-id="mytime-movie-network" tvg-name="MyTime Movie Network" group-title="movies",MyTime Movie Network
 https://appletree-mytimeuk-rakuten.amagi.tv/hls/amagi_hls_data_rakutenAA-mytime-uk-rakuten/CDN/master.m3u8
-#EXTINF:-1 tvg-chno=35 tvg-id="filmzie" tvg-name="Filmzie" group-title="movies",Filmzie
-https://3bd25beecec04b169f33659a7739c10b.mediatailor.us-east-1.amazonaws.com/v1/master/04fd913bb278d8775298c26fdca9d9841f37601f/RakutenTV-eu_Filmzie/playlist.m3u8
 #EXTINF:-1 tvg-chno=44 tvg-id="lone-star-new" tvg-name="Lone Star" group-title="movies",Lone Star
 https://6b88cde9.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmFrdXRlblRWLWV1X0xvbmVTdGFyX0hMUw/playlist.m3u8
 #EXTINF:-1 tvg-chno=50 tvg-id="british-screen-classics" tvg-name="British Screen Classics" group-title="movies",British Screen Classics
@@ -25,8 +23,6 @@ https://amg00654-itv-amg00654c25-rakuten-gb-8165.playouts.now.amagi.tv/playlist/
 https://amg02784-amg02784c1-rakuten-gb-8121.playouts.now.amagi.tv/playlist/amg02784-nollyafricafast-nollyafricahd-rakutengb/playlist.m3u8
 #EXTINF:-1 tvg-chno=65 tvg-id="grjngo-en" tvg-name="Grjngo - Western Films" group-title="movies",Grjngo - Western Films
 https://66f81a14eebd497482b26d30b7a5fe07.mediatailor.us-east-1.amazonaws.com/v1/master/0fb304b2320b25f067414d481a779b77db81760d/RakutenTV-gb_GrjngoWesternMovies/playlist.m3u8
-#EXTINF:-1 tvg-chno=68 tvg-id="popflix" tvg-name="Popflix" group-title="movies",Popflix
-https://75bced9559e343058577aeae94f36a8c.mediatailor.us-east-1.amazonaws.com/v1/master/f4e8c53a8367a5b58e20ce054ea3ce25a3e904d3/RakutenTV-gb_Popflix/playlist.m3u8
 #EXTINF:-1 tvg-chno=109 tvg-id="crime-beat-tv" tvg-name="Crime Beat TV" group-title="tv_shows",Crime Beat TV
 https://8e6c868c.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmFrdXRlblRWLWV1X0NyaW1lQmVhdF9ITFM/playlist.m3u8
 #EXTINF:-1 tvg-chno=112 tvg-id="andromeda-en" tvg-name="Andromeda" group-title="tv_shows",Andromeda
@@ -85,8 +81,6 @@ https://amg00627-amg00627c38-rakuten-gb-9515.playouts.now.amagi.tv/ts-eu-w1-n2/p
 https://1170baa82b1343c29dbf352e2d1a61e5.mediatailor.us-east-1.amazonaws.com/v1/master/0fb304b2320b25f067414d481a779b77db81760d/RakutenTV-gb_GreatBritishMenu/playlist.m3u8
 #EXTINF:-1 tvg-chno=223 tvg-id="graham-norton-eng" tvg-name="Graham Norton" group-title="entertainment",Graham Norton
 https://amg00654-itv-amg00654c35-rakuten-gb-7598.playouts.now.amagi.tv/playlist/amg00654-itvstudiosfast-grahamnortonenglish-rakutengb/playlist.m3u8
-#EXTINF:-1 tvg-chno=224 tvg-id="the-chat-show-channel" tvg-name="The Chat Show Channel" group-title="entertainment",The Chat Show Channel
-https://amg00426-lds-amg00426c11-rakuten-uk-3888.playouts.now.amagi.tv/playlist/amg00426-littledotstudiofast-thechatshowcc-rakutenuk/playlist.m3u8
 #EXTINF:-1 tvg-chno=225 tvg-id="filmrise-hot-ones" tvg-name="Hot Ones" group-title="entertainment",Hot Ones
 https://d39g1vxj2ef6in.cloudfront.net/v1/master/3fec3e5cac39a52b2132f9c66c83dae043dc17d4/prod-rakuten-stitched/master.m3u8
 #EXTINF:-1 tvg-chno=226 tvg-id="zee-one-eng" tvg-name="Z One" group-title="entertainment",Z One
@@ -166,7 +160,7 @@ https://amg02134-amg02134c1-amgplt0018.playout.now3.amagi.tv/ts-us-w2-n1/playlis
 #EXTINF:-1 tvg-chno=409 tvg-id="travelxp-eng" tvg-name="Travelxp" group-title="lifestyle",Travelxp
 https://27c980761ff9437d929e64647afe183a.mediatailor.us-east-1.amazonaws.com/v1/master/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/RakutenTV-eu_TravelXP/playlist.m3u8
 #EXTINF:-1 tvg-chno=410 tvg-id="med-tv" tvg-name="Med.TV" group-title="lifestyle",Med.TV
-https://med-tv-uk.fast.rakuten.tv/v1/master/0547f18649bd788bec7b67b746e47670f558b6b2/production-LiveChannel-medtv-1-restreaming/bitok/eyJzdGlkIjoiNmRlM2EyNjctNzM3MC00NWVjLTg2MTctMDQwZjhiNmE1N2VhIiwibWt0IjoidWsiLCJjaCI6IjEiLCJwdGYiOjV9/hls/main.m3u8
+https://med-tv-uk.fast.rakuten.tv/v1/master/0547f18649bd788bec7b67b746e47670f558b6b2/production-LiveChannel-medtv-1-restreaming/bitok/eyJzdGlkIjoiOWM1OWJjZWEtYzEzYS00YWViLWI3ODUtMmNmZDc1N2Q4NDBlIiwibWt0IjoidWsiLCJjaCI6IjEiLCJwdGYiOjV9/hls/main.m3u8
 #EXTINF:-1 tvg-chno=411 tvg-id="myzen-fit-uk" tvg-name="Wellbeing TV" group-title="lifestyle",Wellbeing TV
 https://amg01255-secomcofites-my-myzen-en-rakuten-cyxqh.amagi.tv/hls/amagi_hls_data_rakutenAA-myzen-en-rakuten/CDN/master.m3u8
 #EXTINF:-1 tvg-chno=413 tvg-id="cgtn-china-travel" tvg-name="China Travel" group-title="lifestyle",China Travel
@@ -334,7 +328,7 @@ https://aftershock-msa-mco-uk.fast.rakuten.tv/v1/master/0547f18649bd788bec7b67b7
 #EXTINF:-1 tvg-chno=846 tvg-id="mayday-air-disaster" tvg-name="Mayday: Air Disaster" group-title="docs_&_factual",Mayday: Air Disaster
 https://c5424e34.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmFrdXRlblRWLWdiX01heWRheUFpckRpc2FzdGVyX0hMUw/playlist.m3u8
 #EXTINF:-1 tvg-chno=877 tvg-id="euronews-live-eng" tvg-name="Euronews LIVE" group-title="news",Euronews LIVE
-https://euronews-live-eng-uk.fast.rakuten.tv/v1/master/0547f18649bd788bec7b67b746e47670f558b6b2/production-LiveChannel-6503-restreaming/bitok/eyJzdGlkIjoiOTA3MTliYzUtMDc4MC00ZmUzLWJmYjQtZTBlNGI2MWVmYWU1IiwibWt0IjoidWsiLCJjaCI6NjUwMywicHRmIjo1fQ%3D%3D/live/eds/euronews-en/26031/euronews-en.m3u8
+https://euronews-live-eng-uk.fast.rakuten.tv/v1/master/0547f18649bd788bec7b67b746e47670f558b6b2/production-LiveChannel-6503-restreaming/bitok/eyJzdGlkIjoiYzNiY2E1YzItYmVlNS00ZjA2LTlkNDMtNjljNmZmZmE3OTU4IiwibWt0IjoidWsiLCJjaCI6NjUwMywicHRmIjo1fQ%3D%3D/live/eds/euronews-en/26031/euronews-en.m3u8
 #EXTINF:-1 tvg-chno=880 tvg-id="ntd-tv" tvg-name="NTD News" group-title="news",NTD News
 https://amg17596-ntdtv-amg17596c1-rakuten-gb-6741.playouts.now.amagi.tv/playlist/amg17596-newtangdynastytelevision-ntdtv-rakutengb/playlist.m3u8
 #EXTINF:-1 tvg-chno=881 tvg-id="the-reuters-60" tvg-name="The Reuters 60" group-title="news",The Reuters 60
@@ -346,7 +340,7 @@ https://e96a7526.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmFrdX
 #EXTINF:-1 tvg-chno=888 tvg-id="bloomberg-tv-plus" tvg-name="Bloomberg TV+" group-title="news",Bloomberg TV+
 https://86ebec83.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmFrdXRlblRWLWV1X0Jsb29tYmVyZ1RWUGx1c19ITFM/playlist.m3u8
 #EXTINF:-1 tvg-chno=892 tvg-id="africanews-eng" tvg-name="Africanews" group-title="news",Africanews
-https://africanews-eng-uk.fast.rakuten.tv/v1/master/0547f18649bd788bec7b67b746e47670f558b6b2/production-LiveChannel-6576-restreaming/bitok/eyJzdGlkIjoiNDc1NTJjZDUtMmI3OS00ZGEwLWE0YmItYWZiM2U3MjZlOTEyIiwibWt0IjoidWsiLCJjaCI6NjU3NiwicHRmIjo1fQ%3D%3D/live/eds/africanews-en/26036/africanews-en.m3u8
+https://africanews-eng-uk.fast.rakuten.tv/v1/master/0547f18649bd788bec7b67b746e47670f558b6b2/production-LiveChannel-6576-restreaming/bitok/eyJzdGlkIjoiYWJlOTY3ZWItNDg3YS00ZjIxLWJhMDMtMDgxMDZjMjQ1ODhjIiwibWt0IjoidWsiLCJjaCI6NjU3NiwicHRmIjo1fQ%3D%3D/live/eds/africanews-en/26036/africanews-en.m3u8
 #EXTINF:-1 tvg-chno=893 tvg-id="cgtn" tvg-name="CGTN" group-title="news",CGTN
 https://amg00405-rakutentv-cgtn-rakuten-i9tar.amagi.tv/master.m3u8
 #EXTINF:-1 tvg-chno=894 tvg-id="newsworld" tvg-name="NewsWorld" group-title="news",NewsWorld
