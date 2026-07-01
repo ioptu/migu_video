@@ -24,7 +24,7 @@ jobs:
         timeout_minutes: 5    # 单次尝试如果超过 5 分钟就判定为超时
         max_attempts: 2       # 超时后重试 1 次 
         retry_on: timeout     # 只有在超时的时候才触发重试
-        retry_delay_mins: 1   # 每次重试之间的等待间隔 
+        retry_wait_seconds: 30   # 每次重试之间的等待间隔 
         command: |
           python MIGU.py
           python sort_m3u.py
