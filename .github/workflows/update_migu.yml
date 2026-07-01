@@ -9,21 +9,28 @@ jobs:
   main:
     name: update migu
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 15 # 总超时
     permissions:
       contents: write  # 允许推送代码
     steps: 
     - name: Checkout code
-      uses: actions/checkout@v5
-    - name: fetch and modify
+      uses: actions/checkout@v7
+    - name: Setup Python
       run: |
           pip install requests futures
+    - name: fetch and modify with Retry
+      uses: nick-fields/retry@v4
+      with:
+        timeout_minutes: 5    # 单次尝试如果超过 5 分钟就判定为超时
+        max_attempts: 2       # 超时后重试 1 次 
+        retry_on: timeout     # 只有在超时的时候才触发重试
+        retry_delay_mins: 1   # 每次重试之间的等待间隔 
+        command: |
+          python MIGU.py
+          python sort_m3u.py
 
-          python MIGU.py || true
-          python sort_m3u.py || true
-
-          wget https://github.com/482349841209/rakuten-m3u-generator/raw/refs/heads/master/output/rakuten.m3u -O rkt.m3u  -t 2 --waitretry=5 || true
-          wget https://github.com/Afiq0/Pluto-TV-Playlists/raw/refs/heads/main/output/plutotv_us.m3u8 -O plt.m3u  -t 2 --waitretry=5 || true
+          wget https://github.com/482349841209/rakuten-m3u-generator/raw/refs/heads/master/output/rakuten.m3u -O rkt.m3u  -t 2 --waitretry=5
+          wget https://github.com/Afiq0/Pluto-TV-Playlists/raw/refs/heads/main/output/plutotv_us.m3u8 -O plt.m3u  -t 2 --waitretry=5
 
           #wget http://epg.51zmt.top:8000/e.xml -O e.xml  -T 30 -t 2 --waitretry=5 || true
 
@@ -45,8 +52,6 @@ jobs:
         [ -f "../cctv.migu.m3u" ] && mv ../cctv.migu.m3u ./cctv.migu.m3u || true
         [ -f ../rkt.m3u ] && mv ../rkt.m3u ./rakutentv.m3u || true
         [ -f ../plt.m3u ] && mv ../plt.m3u ./plutotv.m3u || true
-
-
 
         git add .
         if git diff --cached --quiet; then
