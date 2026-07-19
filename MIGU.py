@@ -22,11 +22,11 @@ headers = {
     "Sec-Fetch-Mode": "cors",
     "Sec-Fetch-Site": "same-site",
     "Support-Pendant": "1",
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0",
     "appCode": "miguvideo_default_h5",
     "appId": "miguvideo",
     "channel": "H5",
-    "sec-ch-ua": "\"Chromium\";v=\"149\", \"Microsoft Edge\";v=\"149\", \"Not.A/Brand\";v=\"99\"",
+    "sec-ch-ua": "\"Chromium\";v=\"150\", \"Microsoft Edge\";v=\"150\", \"Not.A/Brand\";v=\"99\"",
     "sec-ch-ua-mobile": "?0",
     "sec-ch-ua-platform": "\"Windows\"",
     "terminalId": "h5"
@@ -98,25 +98,22 @@ def get_content(pid):
     _headers = {
         "accept": "application/json, text/plain, */*",
         "accept-language": "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6",
-        "apipost-client-id": "81960567-1977-492a-8828-7cc9a5848b60",
         "apipost-language": "zh-cn",
-        "apipost-machine": "13d46013f5c002",
+        "apipost-machine": "bd2d54b7c2002",
         "apipost-platform": "Win",
         "apipost-terminal": "web",
-        "apipost-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOjQwMjE2NjM4Mzk1NTcwNTg1NiwidGltZSI6MTc3OTM2MDU3NiwidXVpZCI6ImMyNWM5ZDM5LTU1MDItMTFmMS1hNWFlLWY2NjY5MWQxOGFiYSJ9fQ.I1SxTAW6A_Tdfk2OjnTv4qqZF3mTreFh8nAqhKExvNo",
         "apipost-version": "8.2.7",
         "cache-control": "no-cache",
         "content-type": "application/json",
         "pragma": "no-cache",
         "priority": "u=1, i",
-        "sec-ch-ua": '"Google Chrome";v="149", "Chromium";v="149", "Not A(Brand";v="24"',
+        "sec-ch-ua": '"Google Chrome";v="150", "Chromium";v="150", "Not A(Brand";v="24"',
         "sec-ch-ua-mobile": "?0",
         "sec-ch-ua-platform": '"Windows"',
         "sec-fetch-dest": "empty",
         "sec-fetch-mode": "cors",
         "sec-fetch-site": "same-origin",
-        "cookie": "apipost-token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOjQwMjE2NjM4Mzk1NTcwNTg1NiwidGltZSI6MTc3OTM2MDU3NiwidXVpZCI6ImMyNWM5ZDM5LTU1MDItMTFmMS1hNWFlLWY2NjY5MWQxOGFiYSJ9fQ.I1SxTAW6A_Tdfk2OjnTv4qqZF3mTreFh8nAqhKExvNo; SERVERID=8c24774bebe341378d5513f514bfb8dc|1780710973|1780710973; SERVERCORSID=8c24774bebe341378d5513f514bfb8dc|1780710973|1780710973",
-        "Referer": "https://workspace.apipost.net/594c83209c88000/apis",
+        "Referer": "https://workspace.apipost.net/guest/apis",
         "Referrer-Policy": "strict-origin-when-cross-origin"
     }
 
@@ -345,7 +342,7 @@ def update(live, url):
     # 提取初始列表
     rawList = response["body"]["dataList"]
     
-    # 【黑名单前置过滤】直接剔除版权限制、无法匿名访问的频道
+    # 【前置过滤】直接剔除无效、无法匿名访问的频道
     dataList = [item for item in rawList if item.get("name") not in ["CHC动作电影","CHC家庭影院","海南广播电视总台自贸频道","海南广播电视总台社会与法频道","海南广播电视总台新闻频道","海南广播电视总台文旅频道","海南广播电视总台少儿频道"]]
     
     # ✅ 修复点2：前置一次性扩容占位符，保护 FLAG 在多线程上下文下的定位安全性
