@@ -29,8 +29,8 @@ jobs:
           python MIGU.py
           python sort_m3u.py
 
-          wget https://github.com/482349841209/rakuten-m3u-generator/raw/refs/heads/master/output/rakuten.m3u -O rkt.m3u  -t 2 --waitretry=5
-          wget https://github.com/Afiq0/Pluto-TV-Playlists/raw/refs/heads/main/output/plutotv_us.m3u8 -O plt.m3u  -t 2 --waitretry=5
+          #wget https://github.com/482349841209/rakuten-m3u-generator/raw/refs/heads/master/output/rakuten.m3u -O rkt.m3u  -t 2 --waitretry=5
+          #wget https://github.com/Afiq0/Pluto-TV-Playlists/raw/refs/heads/main/output/plutotv_us.m3u8 -O plt.m3u  -t 2 --waitretry=5
 
           #wget http://epg.51zmt.top:8000/e.xml -O e.xml  -T 30 -t 2 --waitretry=5 || true
 
