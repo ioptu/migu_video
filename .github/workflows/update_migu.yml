@@ -1,7 +1,7 @@
 name: update migu
 on: 
-  #schedule: 
-    #- cron: 0 * * * *
+  schedule: 
+    - cron: 0 * * * *
   workflow_dispatch:
   repository_dispatch: #允许外部触发,cf worker定时任务延迟在1分钟以内
     types: [mgcron]
